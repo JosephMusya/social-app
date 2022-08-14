@@ -24,31 +24,10 @@ class MainBody extends StatefulWidget {
 }
 
 class _MainBodyState extends State<MainBody> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Center(child: Text('Social App')),
-        ),
-        body: Column(children: [
-          Expanded(child: DisplayPost(['Hello This is a simple post'])),
-          const SizedBox(width: 50),
-          const Expanded(child: InputMessage()),
-        ]));
-  }
-}
-
-class InputMessage extends StatefulWidget {
-  const InputMessage({Key? key}) : super(key: key);
-
-  @override
-  State<InputMessage> createState() => _InputMessageState();
-}
-
-class _InputMessageState extends State<InputMessage> {
   final controller = TextEditingController();
   String text = '';
   List<Post> posts = [];
+
   void submit() {
     setState(() {
       text = controller.text;
@@ -60,21 +39,53 @@ class _InputMessageState extends State<InputMessage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.all(18.0),
-        child: TextField(
-          controller: controller,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.message),
-            suffixIcon: IconButton(
-              onPressed: submit,
-              icon: const Icon(Icons.send),
-              tooltip: 'Post Message',
-            ),
-            labelText: 'Type Message',
+    return Scaffold(
+        appBar: AppBar(
+          title: const Center(child: Text('Social App')),
+        ),
+        body: Column(children: [
+          Expanded(
+              child: ListView.builder(
+                  itemCount: posts.length,
+                  itemBuilder: (context, index) {
+                    var post = posts[index];
+                    print(post.body);
+                    return Card(
+                        child: Row(
+                      children: [
+                        Expanded(
+                            child: ListTile(
+                          title: Text(post.body),
+                          subtitle: Text(post.author),
+                        )),
+                        Row(
+                          children: [
+                            IconButton(
+                                onPressed: post.likePost,
+                                icon: const Icon(Icons.thumb_up)),
+                          ],
+                        )
+                      ],
+                    ));
+                  })),
+          const SizedBox(width: 50),
+          Expanded(
+            child: Container(
+                padding: const EdgeInsets.all(18.0),
+                child: TextField(
+                  controller: controller,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.message),
+                    suffixIcon: IconButton(
+                      onPressed: submit,
+                      icon: const Icon(Icons.send),
+                      tooltip: 'Post Message',
+                    ),
+                    labelText: 'Type Message',
+                  ),
+                )),
           ),
-          // onChanged: (text) => changeInput(text),
-        ));
+        ]));
   }
 }
 
@@ -93,20 +104,5 @@ class Post {
     }
     userLiked = false;
     likes -= 1;
-  }
-}
-
-class DisplayPost extends StatefulWidget {
-  final List<Post> listitems = [];
-  DisplayPost(listitems, {Key? key}) : super(key: key);
-
-  @override
-  State<DisplayPost> createState() => _DisplayPostState();
-}
-
-class _DisplayPostState extends State<DisplayPost> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
