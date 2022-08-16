@@ -25,9 +25,13 @@ class _LoginState extends State<Login> {
   TextEditingController controller = TextEditingController();
   void _submit() {
     username = controller.text;
+    if (username == '') {
+      const Login();
+    } else {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomePage(username)));
+    }
     // controller.clear();
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const HomePage()));
   }
 
   @override

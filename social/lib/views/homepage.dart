@@ -3,8 +3,10 @@ import 'package:social/views/postdisplay.dart';
 import 'package:social/views/textInput.dart';
 import '../data/post.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  String name = '';
+  HomePage(this.name, {Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -17,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   void submit(text) {
     setState(() {
       this.text = text;
-      posts.add(Post(text, 'Joe', 0, false));
+      posts.add(Post(text, widget.name, 0, false));
     });
   }
 
