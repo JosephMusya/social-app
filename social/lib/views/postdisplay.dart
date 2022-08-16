@@ -22,7 +22,6 @@ class _PostViewState extends State<PostView> {
         itemCount: widget.listitems.length,
         itemBuilder: (context, index) {
           var post = widget.listitems[index];
-          print(post.likes);
           return Card(
             child: Row(
               children: [

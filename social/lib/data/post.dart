@@ -10,8 +10,9 @@ class Post {
     if (!userLiked) {
       userLiked = true;
       likes += 1;
+    } else if (userLiked) {
+      userLiked = false;
+      likes -= 1;
     }
-    userLiked = false;
-    likes -= 1;
   }
 }
