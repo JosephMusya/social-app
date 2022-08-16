@@ -6,11 +6,16 @@ class UserSharedPreferences {
   static late SharedPreferences _prefs;
 
   static const _keyUsername = 'username';
+  static const _keyPost = 'post';
 
   static Future init() async => _prefs = await SharedPreferences.getInstance();
 
   static Future setUsername(String _username) =>
       _prefs.setString(_keyUsername, _username);
 
+  static Future setPost(List<String> _post) =>
+      _prefs.setStringList(_keyPost, _post);
+
   static getUsername() => _prefs.getString(_keyUsername);
+  static getPosts() => _prefs.getStringList(_keyPost);
 }

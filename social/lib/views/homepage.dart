@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:social/views/postdisplay.dart';
 import 'package:social/views/textInput.dart';
 import '../data/post.dart';
+import '../data/sharedPreferences.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
@@ -32,7 +33,17 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       this.text = text;
       posts.add(Post(text, widget.name, false));
+      savePost(posts);
     });
+  }
+
+  void savePost(posts) async => await UserSharedPreferences.setPost(posts);
+
+  @override
+  void initState() {
+    super.initState();
+    UserSharedPreferences.init();
+    posts = UserSharedPreferences.getPosts() ?? [];
   }
 
   @override

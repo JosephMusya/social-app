@@ -44,7 +44,7 @@ class _LoginState extends State<Login> {
   void initState() {
     super.initState();
     UserSharedPreferences.init();
-    username = UserSharedPreferences.getUsername();
+    username = UserSharedPreferences.getUsername() ?? '';
   }
 
   @override
