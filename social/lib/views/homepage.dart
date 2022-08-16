@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   void submit(text) {
     setState(() {
       this.text = text;
-      posts.add(Post(text, widget.name, 0, false));
+      posts.add(Post(text, widget.name, false));
     });
   }
 

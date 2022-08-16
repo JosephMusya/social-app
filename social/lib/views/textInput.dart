@@ -28,17 +28,23 @@ class _TextInputState extends State<TextInput> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      style: const TextStyle(fontSize: 18),
-      controller: controller,
-      decoration: InputDecoration(
-        prefixIcon: const Icon(Icons.message),
-        suffixIcon: IconButton(
-          onPressed: click,
-          icon: const Icon(Icons.send),
-          tooltip: 'Post Message',
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: TextFormField(
+        minLines: 2,
+        maxLines: 15,
+        keyboardType: TextInputType.multiline,
+        style: const TextStyle(fontSize: 17),
+        controller: controller,
+        decoration: InputDecoration(
+          hintText: 'Type a shopping list...',
+          suffixIcon: IconButton(
+            onPressed: click,
+            icon: const Icon(Icons.check),
+            tooltip: 'Save shopping list',
+          ),
+          labelText: 'Shopping List',
         ),
-        labelText: 'Type Message',
       ),
     );
   }

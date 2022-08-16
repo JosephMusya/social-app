@@ -1,18 +1,15 @@
 class Post {
   String body = '';
-  String author = '';
-  int likes = 0;
-  bool userLiked = false;
+  String user = '';
+  bool done = false;
 
-  Post(this.body, this.author, this.likes, this.userLiked);
+  Post(this.body, this.user, this.done);
 
   void likePost() {
-    if (!userLiked) {
-      userLiked = true;
-      likes += 1;
-    } else if (userLiked) {
-      userLiked = false;
-      likes -= 1;
+    if (!done) {
+      done = true;
+    } else if (done) {
+      done = false;
     }
   }
 }

@@ -27,22 +27,19 @@ class _PostViewState extends State<PostView> {
               children: [
                 Expanded(
                     child: ListTile(
-                  title: Text(post.body),
-                  subtitle: Text(post.author),
+                  title: Text(
+                    post.body,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  subtitle: Text(post.user),
                 )),
                 Row(
                   children: [
-                    Text(
-                      post.likes.toString(),
-                      style: const TextStyle(
-                        color: Colors.blueGrey,
-                      ),
-                    ),
                     IconButton(
                       onPressed: () => like(post.likePost),
                       icon: Icon(
-                        Icons.thumb_up,
-                        color: post.userLiked ? Colors.blue : Colors.black,
+                        Icons.check_circle_outline,
+                        color: post.done ? Colors.blue : Colors.black,
                       ),
                     ),
                   ],
