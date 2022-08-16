@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class TextInput extends StatefulWidget {
@@ -27,6 +29,7 @@ class _TextInputState extends State<TextInput> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      style: const TextStyle(fontSize: 18),
       controller: controller,
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.message),
