@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:social/data/sharedPreferences.dart';
 import 'package:social/views/homepage.dart';
 
 class LoginPage extends StatelessWidget {
@@ -6,9 +8,9 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
-      body: const Login(),
+    return const Scaffold(
+      // ignore: prefer_const_constructors
+      body: Login(),
     );
   }
 }
@@ -25,13 +27,24 @@ class _LoginState extends State<Login> {
   TextEditingController controller = TextEditingController();
   void _submit() {
     username = controller.text;
+
     if (username == '') {
       const Login();
     } else {
+      setUser();
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => HomePage(username)));
     }
-    // controller.clear();
+    controller.clear();
+  }
+
+  void setUser() async => await UserSharedPreferences.setUsername(username);
+
+  @override
+  void initState() {
+    super.initState();
+    UserSharedPreferences.init();
+    username = UserSharedPreferences.getUsername();
   }
 
   @override
@@ -45,7 +58,8 @@ class _LoginState extends State<Login> {
           controller: controller,
           decoration: InputDecoration(
             prefixIcon: const Icon(Icons.person),
-            suffixIcon: IconButton(onPressed: _submit, icon: Icon(Icons.done)),
+            suffixIcon:
+                IconButton(onPressed: _submit, icon: const Icon(Icons.done)),
             border: const OutlineInputBorder(
                 borderSide: BorderSide(width: 5, color: Colors.blue)),
           ),

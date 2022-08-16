@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:social/views/homepage.dart';
 import 'data/login.dart';
+import 'data/sharedPreferences.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await UserSharedPreferences.init();
   runApp(const MyApp());
 }
 
